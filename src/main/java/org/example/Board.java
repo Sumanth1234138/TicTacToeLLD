@@ -28,10 +28,18 @@ public class Board {
     }
 
     public boolean makeMove(Move move, char symbol) {
-        if (grid[move.row][move.col] != '-') {
+        int row = move.getRow();
+        int col = move.getCol();
+
+        if (row < 0 || row >= size || col < 0 || col >= size) {
             return false;
         }
-        grid[move.row][move.col] = symbol;
+
+        if (grid[row][col] != '-') {
+            return false;
+        }
+
+        grid[row][col] = symbol;
         return true;
     }
 
@@ -87,5 +95,18 @@ public class Board {
             }
         }
         return true;
+    }
+
+    public boolean isEmpty(int row, int col) {
+        return grid[row][col] == '-';
+    }
+
+    public void setCell(int row, int col, char symbol) {
+        grid[row][col] = symbol;
+    }
+
+    // ✅ FIXED: now inside class
+    public char[][] getGrid() {
+        return grid;
     }
 }
